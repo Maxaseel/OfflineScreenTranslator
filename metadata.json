@@ -1,0 +1,8 @@
+{
+  "name": "Offline Screen Translator Professional",
+  "package": "com.example",
+  "version": "1.0.0",
+  "offline": true,
+  "apiKeyFree": true,
+  "cost": "$0"
+}

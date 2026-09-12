@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Screen Translator</string>
+    <string name="screen_translate_title">Ekran Tarjimasi</string>
+    <string name="offline_dictionary_title">Oflayn Lug\'at</string>
+    <string name="translation_history_title">Tarix</string>
+    <string name="phrasebook_title">So\'zlashgich</string>
+</resources>

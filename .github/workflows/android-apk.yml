@@ -21,15 +21,21 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-          cache: gradle
 
       - name: Set up Android SDK & Accept Licenses
         uses: android-actions/setup-android@v3
         with:
           packages: 'platform-tools platforms;android-34 build-tools;34.0.0'
 
-      - name: Make Gradle executable
-        run: chmod +x gradlew
+      - name: Install System Gradle & Generate Missing Wrapper
+        run: |
+          sudo apt-get update && sudo apt-get install -y gradle
+          # إذا كان ملف التشغيل مفقوداً، نقوم بتوليده تلقائياً
+          if [ ! -f "gradle/wrapper/gradle-wrapper.jar" ]; then
+            echo "Gradle wrapper jar missing, generating..."
+            gradle wrapper
+          fi
+          chmod +x gradlew
 
       - name: Build debug APK
         run: ./gradlew :app:assembleDebug --no-daemon --stacktrace

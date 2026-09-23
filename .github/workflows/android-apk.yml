@@ -33,6 +33,11 @@ jobs:
           distribution: temurin
           java-version: "8"
 
+      # --- الخطوة الجديدة التي تم إضافتها لحل المشكلة ---
+      - name: Generate Gradle Wrapper
+        run: gradle wrapper
+      # -------------------------------------------------
+
       - name: Make Gradle executable
         run: chmod +x gradlew
 

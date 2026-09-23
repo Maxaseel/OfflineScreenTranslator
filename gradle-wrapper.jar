@@ -1,0 +1,12 @@
+# إجبار Git على إضافة ملف الجافا الخاص بـ gradle
+git add -f gradle/wrapper/gradle-wrapper.jar
+
+# إضافة ملف الإعدادات الخاص بالـ wrapper (إن لم يكن مضافاً)
+git add -f gradle/wrapper/gradle-wrapper.properties
+
+# إضافة سكربتات التشغيل
+git add gradlew gradlew.bat
+
+# عمل Commit و Push
+git commit -m "Fix: Add missing gradle-wrapper.jar"
+git push

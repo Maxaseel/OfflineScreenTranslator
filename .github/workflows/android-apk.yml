@@ -16,26 +16,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 8 (Compatible with older Gradle)
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "8"
 
       - name: Set up Android SDK & Accept Licenses
         uses: android-actions/setup-android@v3
         with:
-          packages: 'platform-tools platforms;android-34 build-tools;34.0.0'
+          packages: 'platform-tools platforms;android-28 build-tools;28.0.3'
 
-      - name: Setup Compatible Gradle Wrapper
-        run: |
-          sudo apt-get update && sudo apt-get install -y gradle
-          # تعيين إصدار Gradle 7.3.3 المتوافق مع Java 17
-          gradle wrapper --gradle-version 7.3.3
-          chmod +x gradlew
+      - name: Make Gradle executable
+        run: chmod +x gradlew
 
-      - name: Build debug APK with Info Logs
-        run: ./gradlew :app:assembleDebug --no-daemon --info --stacktrace
+      - name: Build debug APK
+        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
 
       - name: Build release APK
         run: ./gradlew :app:assembleRelease --no-daemon || true

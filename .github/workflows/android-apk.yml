@@ -27,18 +27,18 @@ jobs:
         with:
           packages: 'platform-tools platforms;android-34 build-tools;34.0.0'
 
-      - name: Upgrade Gradle Wrapper for Java 17 Compatibility
+      - name: Setup Compatible Gradle Wrapper
         run: |
           sudo apt-get update && sudo apt-get install -y gradle
-          # تحديث إصدار Gradle في المشروع ليدعم Java 17 الحديثة
-          gradle wrapper --gradle-version 7.6.3
+          # تعيين إصدار Gradle 7.3.3 المتوافق مع Java 17
+          gradle wrapper --gradle-version 7.3.3
           chmod +x gradlew
 
-      - name: Build debug APK
-        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
+      - name: Build debug APK with Info Logs
+        run: ./gradlew :app:assembleDebug --no-daemon --info --stacktrace
 
       - name: Build release APK
-        run: ./gradlew :app:assembleRelease --no-daemon --stacktrace || true
+        run: ./gradlew :app:assembleRelease --no-daemon || true
 
       - name: Collect APKs
         run: |

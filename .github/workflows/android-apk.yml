@@ -33,10 +33,12 @@ jobs:
           distribution: temurin
           java-version: "8"
 
-      # --- الخطوة الجديدة التي تم إضافتها لحل المشكلة ---
-      - name: Generate Gradle Wrapper
-        run: gradle wrapper
-      # -------------------------------------------------
+      # --- الحل النهائي: تحميل الملف المفقود مباشرة بدون تعارض الجافا ---
+      - name: Restore missing gradle-wrapper.jar
+        run: |
+          mkdir -p gradle/wrapper
+          wget -q -O gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v6.8.3/gradle/wrapper/gradle-wrapper.jar
+      # ------------------------------------------------------------------
 
       - name: Make Gradle executable
         run: chmod +x gradlew

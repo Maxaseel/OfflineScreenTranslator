@@ -16,16 +16,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 8 (Compatible with older Gradle)
+      - name: Set up JDK 17 (Required for Android SDK tools)
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "8"
+          java-version: "17"
 
       - name: Set up Android SDK & Accept Licenses
         uses: android-actions/setup-android@v3
         with:
           packages: 'platform-tools platforms;android-28 build-tools;28.0.3'
+
+      - name: Switch to JDK 8 (Required for legacy Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "8"
 
       - name: Make Gradle executable
         run: chmod +x gradlew
